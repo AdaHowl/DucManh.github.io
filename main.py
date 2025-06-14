@@ -13,7 +13,7 @@ cars = [
         "id": 1,
         "name": "Lamborghini Aventador",
         "price": 300000,
-        "image": "https://images.unsplash.com/photo-1616352119484-0c3a3bd1269d",
+        "image": "https://cafefcdn.com/203337114487263232/2023/7/20/lambor-1689840945762-16898409458521341482549.jpg",
         "desc": "V12 engine, aggressive design, supercar class."
     },
     {
