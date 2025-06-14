@@ -1,45 +1,63 @@
 import streamlit as st
 
 # Cấu hình trang
-st.set_page_config(page_title="Login Page", page_icon="🔐", layout="centered")
+st.set_page_config(page_title="Car Shop", page_icon="🚗", layout="wide")
 
-# HÌNH ẢNH TRANG ĐĂNG NHẬP (Ảnh từ URL hoặc file local)
-st.image("https://cdn-icons-png.flaticon.com/512/747/747376.png", width=120, caption="Welcome to My App")
-
-# Tiêu đề và mô tả
-st.markdown("<h2 style='text-align: center;'>🔐 Secure Login</h2>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center;'>Please enter your credentials to continue</p>", unsafe_allow_html=True)
-
-# STYLE tuỳ chỉnh bằng HTML
+# CSS tuỳ chỉnh cho giao diện đẹp
 st.markdown("""
     <style>
-    .login-container {
+    .title {
+        text-align: center;
+        font-size: 48px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .subtitle {
+        text-align: center;
+        font-size: 20px;
+        color: gray;
+        margin-bottom: 40px;
+    }
+    .car-card {
         background-color: #f9f9f9;
-        padding: 2rem;
+        padding: 20px;
         border-radius: 15px;
-        max-width: 400px;
-        margin: auto;
-        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+        text-align: center;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# FORM
-with st.form("login_form"):
-    st.markdown('<div class="login-container">', unsafe_allow_html=True)
+# Tiêu đề trang
+st.markdown('<div class="title">🚗 Premium Car Dealership</div>', unsafe_allow_html=True)
+st.markdown('<div class="subtitle">Find your dream car with ease and style</div>', unsafe_allow_html=True)
 
-    username = st.text_input("👤 Username")
-    password = st.text_input("🔒 Password", type="password")
-    remember = st.checkbox("Remember me")
+# Dữ liệu xe (không có ảnh)
+cars = [
+    {
+        "name": "Lamborghini Huracan",
+        "price": "$250,000",
+        "desc": "V10 engine, 0-100km/h in 2.9s, aggressive and iconic design."
+    },
+    {
+        "name": "Tesla Model S Plaid",
+        "price": "$135,000",
+        "desc": "Electric, 0-100km/h in 1.99s, autopilot, luxury interior."
+    },
+    {
+        "name": "Mercedes-Benz S-Class",
+        "price": "$120,000",
+        "desc": "Luxury sedan, advanced tech, unmatched comfort."
+    }
+]
 
-    login_button = st.form_submit_button("Log In")
-
-    st.markdown('</div>', unsafe_allow_html=True)
-
-# Kiểm tra đăng nhập
-if login_button:
-    if username == "admin" and password == "123456":
-        st.success(f"✅ Welcome back, **{username}**!")
-        st.balloons()
-    else:
-        st.error("❌ Wrong username or password. Try again.")
+# Hiển thị danh sách xe theo cột
+cols = st.columns(3)
+for i, car in enumerate(cars):
+    with cols[i]:
+        st.markdown('<div class="car-card">', unsafe_allow_html=True)
+        st.subheader(car["name"])
+        st.write(f"💰 **Price**: {car['price']}")
+        if st.button("🔍 View Details", key=f"btn{i}"):
+            st.info(f"📌 {car['desc']}")
+        st.markdown('</div>', unsafe_allow_html=True)
