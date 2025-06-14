@@ -1,7 +1,7 @@
 import streamlit as st
 
 # Cấu hình trang
-st.set_page_config(page_title="Car Showroom", page_icon="🚘", layout="wide")
+st.set_page_config(page_title="Car Showroom", layout="wide")
 
 # Tạo session lưu giỏ hàng
 if "cart" not in st.session_state:
