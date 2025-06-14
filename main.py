@@ -1,74 +1,74 @@
 import streamlit as st
 
 # Cấu hình trang
-st.set_page_config(page_title="Car Shop", page_icon="🚗", layout="wide")
+st.set_page_config(page_title="Car Showroom", page_icon="🚘", layout="wide")
 
-# Tạo giỏ hàng bằng session state
+# Tạo session lưu giỏ hàng
 if "cart" not in st.session_state:
     st.session_state.cart = []
 
-# Danh sách xe với ảnh từ internet (link an toàn, minh họa)
+# Dữ liệu xe (ảnh từ Unsplash - chắc chắn chạy được)
 cars = [
     {
         "id": 1,
-        "name": "Lamborghini Huracan",
-        "price": 250000,
-        "image": "https://cdn.motor1.com/images/mgl/BE22b/s1/lamborghini-huracan-tecnica.jpg",
-        "desc": "V10 engine, 0-100km/h in 2.9s. Iconic and aggressive."
+        "name": "Lamborghini Aventador",
+        "price": 300000,
+        "image": "https://images.unsplash.com/photo-1616352119484-0c3a3bd1269d",
+        "desc": "V12 engine, aggressive design, supercar class."
     },
     {
         "id": 2,
-        "name": "Tesla Model S Plaid",
-        "price": 135000,
-        "image": "https://tesla-cdn.thron.com/delivery/public/image/tesla/342c3173-f6fd-4c7e-b99f-d4a31fdf2a3f/bvlatuR/std/2880x1800/MS-Interior-Grid-A-Desktop",
-        "desc": "Electric, 0-100km/h in 1.99s. Autopilot. Futuristic."
+        "name": "Tesla Model 3",
+        "price": 48000,
+        "image": "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7",
+        "desc": "Electric, autopilot, budget-friendly luxury."
     },
     {
         "id": 3,
-        "name": "Mercedes-Benz S-Class",
-        "price": 120000,
-        "image": "https://www.mercedes-benz.com/en/vehicles/passenger-cars/s-class/_jcr_content/image/MQ6-12-image-20230705115110/01-mercedes-benz-vehicles-s-class-v223-2023-3400x1440.jpeg",
-        "desc": "Luxury sedan, world-class tech & comfort."
+        "name": "BMW M4",
+        "price": 90000,
+        "image": "https://images.unsplash.com/photo-1619025082454-2b9a7fe55bd2",
+        "desc": "Sporty coupe, high performance, German engineering."
     }
 ]
 
 # Tiêu đề
-st.markdown("<h1 style='text-align:center;'>🚗 Luxury Car Showroom</h1>", unsafe_allow_html=True)
-st.markdown("<h4 style='text-align:center; color:gray;'>Buy your dream car – fast, safe, modern</h4>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align:center;'>🚘 Premium Car Showroom</h1>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align:center; color:gray;'>Choose your next ride!</h4>", unsafe_allow_html=True)
 st.markdown("---")
 
-# Giao diện chia cột: Trái (sản phẩm), Phải (giỏ hàng)
-left_col, right_col = st.columns([2, 1])
+# Layout: trái (sản phẩm) - phải (giỏ hàng)
+left, right = st.columns([2, 1])
 
-# 👉 CỘT TRÁI: DANH SÁCH XE
-with left_col:
-    st.subheader("🏎️ Available Cars")
+# CỘT TRÁI: Danh sách sản phẩm
+with left:
+    st.subheader("🏎️ Cars for Sale")
     for car in cars:
         with st.container(border=True):
             st.image(car["image"], use_column_width=True)
             st.markdown(f"### {car['name']}")
-            st.write(f"💰 Price: **${car['price']:,}**")
+            st.write(f"💰 **Price**: ${car['price']:,}")
             st.caption(car["desc"])
             if st.button("➕ Add to Cart", key=f"add_{car['id']}"):
                 st.session_state.cart.append(car)
                 st.success(f"{car['name']} added to cart!")
 
-# 🛒 CỘT PHẢI: GIỎ HÀNG & THANH TOÁN
-with right_col:
+# CỘT PHẢI: Giỏ hàng
+with right:
     st.subheader("🛒 Your Cart")
     total = 0
     if st.session_state.cart:
-        for idx, item in enumerate(st.session_state.cart):
+        for item in st.session_state.cart:
             st.write(f"• {item['name']} - ${item['price']:,}")
             total += item['price']
         st.markdown(f"**🧾 Total: ${total:,}**")
         
-        # Nút xoá giỏ hàng
+        # Xoá giỏ hàng
         if st.button("❌ Clear Cart"):
             st.session_state.cart = []
-            st.info("Cart cleared.")
+            st.info("Cart cleared!")
 
-        # Nút mua hàng
+        # Mua hàng
         if st.button("✅ Checkout"):
             st.success("🎉 Purchase successful! Thank you.")
             st.balloons()
