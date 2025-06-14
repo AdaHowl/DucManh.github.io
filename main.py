@@ -20,14 +20,14 @@ cars = [
         "id": 2,
         "name": "Tesla Model 3",
         "price": 48000,
-        "image": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fdantri.com.vn%2Fo-to-xe-may%2Ftop-10-xe-moi-dat-nhat-the-gioi-hien-nay-20221005154110406.htm&psig=AOvVaw1oNjTyRx2Ae_zTW8cWfp38&ust=1749966595599000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCJiBo-Cb8I0DFQAAAAAdAAAAABAL",
+        "image": "https://hyundaibinhthuan.vn/wp-content/uploads/Ngoai-that-Hyundai-Tucson-10-3.jpg",
         "desc": "Electric, autopilot, budget-friendly luxury."
     },
     {
         "id": 3,
         "name": "BMW M4",
         "price": 90000,
-        "image": "https://www.google.com/imgres?q=xe&imgurl=https%3A%2F%2Ftapchi.toyota.com.vn%2Fuploads%2Fimages%2Fcac-dong-xe-toyota-16.png&imgrefurl=https%3A%2F%2Ftapchi.toyota.com.vn%2Fvi%2Ftin-tuc%2F228%2Fcac-dong-xe-toyota&docid=sFWpKsuoDzjc7M&tbnid=zyqjYxiBRIExSM&vet=12ahUKEwjgqYPbm_CNAxUPnK8BHXhwAMEQM3oECEAQAA..i&w=1218&h=1015&hcb=2&ved=2ahUKEwjgqYPbm_CNAxUPnK8BHXhwAMEQM3oECEAQAA",
+        "image": "https://media.vov.vn/sites/default/files/styles/large/public/2023-07/z4500176061644_8dd6ee4c917cd893d7ae135dc8a51368.jpg",
         "desc": "Sporty coupe, high performance, German engineering."
     }
 ]
