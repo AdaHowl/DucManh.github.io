@@ -1,13 +1,85 @@
 import streamlit as st
 
-# Cấu hình trang
+# ==== Cấu hình Streamlit ====
 st.set_page_config(page_title="Car Showroom", layout="wide")
 
-# Tạo session lưu giỏ hàng
+# ==== Tạo session lưu giỏ hàng ====
 if "cart" not in st.session_state:
     st.session_state.cart = []
 
-# Dữ liệu xe
+# ==== Thanh điều hướng giống BMW ====
+st.markdown("""
+    <style>
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 40px;
+            background-color: white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        .navbar-left img {
+            height: 40px;
+        }
+        .navbar-left a {
+            text-decoration: none;
+            color: black;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        .navbar-left a:hover {
+            color: #007BFF;
+        }
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+        .navbar-right span {
+            cursor: pointer;
+        }
+        .navbar-right span:hover {
+            color: #000;
+        }
+    </style>
+
+    <div class="navbar">
+        <div class="navbar-left">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/BMW.svg" alt="logo">
+            <a href="#">Trang chủ</a>
+            <a href="#">Mẫu Xe</a>
+            <a href="#">Đặt Hẹn Lái Thử</a>
+            <a href="#">Hệ Thống Phân Phối</a>
+            <a href="#">Tìm Hiểu Thêm BMW</a>
+        </div>
+        <div class="navbar-right">
+            <span>ENG</span>
+            <span>🛒</span>
+            <span>📍</span>
+        </div>
+    </div>
+""", unsafe_allow_html=True)
+
+# ==== Tiêu đề chính ====
+st.markdown("""
+    <div style="text-align:center; padding:30px 0 10px;">
+        <h1 style="font-size:3.5em; color:#FF4B4B;">🚘 Premium Car Showroom</h1>
+        <p style="font-size:1.3em; color:gray;">Choose your next ride with style!</p>
+    </div>
+    <hr style="border:1px solid #eee;">
+""", unsafe_allow_html=True)
+
+# ==== Dữ liệu các dòng xe ====
 cars = [
     {
         "id": 1,
@@ -32,32 +104,31 @@ cars = [
     }
 ]
 
-# Tiêu đề hiện đại
-st.markdown("""
-    <div style='text-align:center;'>
-        <h1 style='font-size:3.2em;'>🚘 <span style='color:#2c3e50;'>Premium Car Showroom</span></h1>
-        <p style='font-size:1.2em; color:gray;'>Choose your next ride!</p>
-    </div>
-    <hr style='margin-top:20px;'>
-""", unsafe_allow_html=True)
+# ==== Layout: trái (sản phẩm) - phải (giỏ hàng) ====
+left, right = st.columns([2.5, 1])
 
-# Layout 2 cột
-left, right = st.columns([2, 1])
-
-# Cột trái: Danh sách sản phẩm
+# ==== CỘT TRÁI: Sản phẩm ====
 with left:
-    st.markdown("<h2 style='margin-bottom:20px;'>🏎️ Cars for Sale</h2>", unsafe_allow_html=True)
+    st.markdown("""
+        <h2 style="color:#2E86C1; font-weight:700;">🏎️ Cars for Sale</h2>
+    """, unsafe_allow_html=True)
+
     for car in cars:
-        with st.container(border=True):
-            st.image(car["image"], use_container_width=True)
-            st.markdown(f"<h4 style='margin-top:10px;'>{car['name']}</h4>", unsafe_allow_html=True)
-            st.write(f"💰 **Price**: ${car['price']:,}")
-            st.caption(car["desc"])
-            if st.button("➕ Add to Cart", key=f"add_{car['id']}"):
+        with st.container(border=False):
+            st.markdown(f"""
+                <div style="background-color:#f9f9f9; padding:20px; margin-bottom:25px; border-radius:15px; box-shadow: 0px 4px 10px rgba(0,0,0,0.05);">
+                    <img src="{car['image']}" style="width:100%; border-radius:10px;"/>
+                    <h3 style="margin-top:15px;">{car['name']}</h3>
+                    <p style="color:#888;">{car['desc']}</p>
+                    <p style="font-weight:bold; color:#27AE60;">💰 Price: ${car['price']:,}</p>
+                </div>
+            """, unsafe_allow_html=True)
+
+            if st.button(f"➕ Add to Cart: {car['name']}", key=f"add_{car['id']}"):
                 st.session_state.cart.append(car)
                 st.success(f"{car['name']} added to cart!")
 
-# Cột phải: Giỏ hàng
+# ==== CỘT PHẢI: Giỏ hàng ====
 with right:
     st.subheader("🛒 Your Cart")
     total = 0
@@ -67,102 +138,15 @@ with right:
             total += item['price']
         st.markdown(f"**🧾 Total: ${total:,}**")
 
-        if st.button("❌ Clear Cart"):
-            st.session_state.cart = []
-            st.info("Cart cleared!")
-
-        if st.button("✅ Checkout"):
-            st.success("🎉 Purchase successful! Thank you.")
-            st.balloons()
-            st.session_state.cart = []
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("❌ Clear Cart"):
+                st.session_state.cart = []
+                st.info("Cart cleared!")
+        with col2:
+            if st.button("✅ Checkout"):
+                st.success("🎉 Purchase successful! Thank you.")
+                st.balloons()
+                st.session_state.cart = []
     else:
         st.info("Your cart is empty.")
-
-# ==== FOOTER ====
-st.markdown("""
-<style>
-.footer {
-    background-color: #2c2c2c;
-    color: white;
-    padding: 40px 60px;
-    border-top-left-radius: 60px;
-    margin-top: 50px;
-}
-.footer h4 {
-    margin-bottom: 15px;
-    color: white;
-}
-.footer a, .footer p {
-    color: #ccc;
-    text-decoration: none;
-    font-size: 14px;
-}
-.footer a:hover {
-    color: white;
-}
-.footer-section {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 40px;
-}
-.footer .subscribe {
-    display: flex;
-    margin-top: 10px;
-}
-.footer .subscribe input {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px 0 0 5px;
-    outline: none;
-}
-.footer .subscribe button {
-    background-color: #27ae60;
-    border: none;
-    color: white;
-    padding: 8px 15px;
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
-}
-.footer .subscribe button:hover {
-    background-color: #1e8449;
-}
-</style>
-
-<div class="footer">
-    <div class="footer-section">
-        <div>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Motorist_logo_red_white_text.png" style="height:40px;">
-            <p style="margin-top:10px;">CHO TÀI XẾ THÔNG MINH</p>
-            <p>Việt Nam</p>
-        </div>
-        <div>
-            <h4>Motorist</h4>
-            <p><a href="#">Câu Chuyện Thương Hiệu</a></p>
-            <p><a href="#">Công Việc</a></p>
-            <p><a href="#">Liên Hệ Chúng Tôi</a></p>
-            <p><a href="#">Cảm Nhận</a></p>
-        </div>
-        <div>
-            <h4>Dịch Vụ</h4>
-            <p><a href="#">Bán Xe</a></p>
-            <p><a href="#">Thẩm Định Xe</a></p>
-        </div>
-        <div>
-            <h4>Liên Hệ</h4>
-            <p>📍 Căn D-00.03, Tầng 3, Số 02 Đường Số 13, Thủ Thiêm, TP. Thủ Đức, TP.HCM</p>
-            <p>🕐 10:00am – 6:00pm (Đóng cửa ngày lễ)</p>
-            <p>📞 02873080018</p>
-            <p>📧 enquiry@motorist.vn</p>
-        </div>
-        <div>
-            <h4>Đăng Ký Bản Tin</h4>
-            <p>Hãy là người đầu tiên nhận ưu đãi & tin tức.</p>
-            <div class="subscribe">
-                <input type="email" placeholder="Email của bạn">
-                <button>✈️</button>
-            </div>
-        </div>
-    </div>
-</div>
-""", unsafe_allow_html=TrueTrue)
