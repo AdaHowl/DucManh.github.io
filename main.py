@@ -13,21 +13,21 @@ cars = [
         "id": 1,
         "name": "Lamborghini Aventador",
         "price": 300000,
-        "image": "https://images.unsplash.com/photo-1616352119484-0c3a3bd1269d",
+        "image": "https://cafefcdn.com/203337114487263232/2023/7/20/lambor-1689840945762-16898409458521341482549.jpg",
         "desc": "V12 engine, aggressive design, supercar class."
     },
     {
         "id": 2,
         "name": "Tesla Model 3",
         "price": 48000,
-        "image": "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7",
+        "image": "https://www.electrive.com/media/2025/01/tesla-model-y-facelift-supercharger-ladestation-charging-station-2025-04.jpg.webp",
         "desc": "Electric, autopilot, budget-friendly luxury."
     },
     {
         "id": 3,
         "name": "BMW M4",
         "price": 90000,
-        "image": "https://images.unsplash.com/photo-1619025082454-2b9a7fe55bd2",
+        "image": "https://images.netdirector.co.uk/gforces-auto/image/upload/q_auto,c_fill,f_auto,fl_lossy,w_1600,h_727/auto-titan/1e152d896f300c6721210deaa02ed215/di23_000189521.jpg",
         "desc": "Sporty coupe, high performance, German engineering."
     }
 ]
