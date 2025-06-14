@@ -1,4 +1,1 @@
-streamlit>=1.30
-steamlit-authenticator
-pandas
-seaborn
+streamlit
