@@ -1,39 +1,45 @@
 import streamlit as st
 
-# Giao diện tiêu đề và mô tả
-st.set_page_config(page_title="Login Form", page_icon="🔐", layout="centered")
-st.title("🔐 Welcome to My App")
-st.subheader("Please log in to continue")
+# Cấu hình trang
+st.set_page_config(page_title="Login Page", page_icon="🔐", layout="centered")
 
-# Tùy chỉnh style một chút cho dễ nhìn
+# HÌNH ẢNH TRANG ĐĂNG NHẬP (Ảnh từ URL hoặc file local)
+st.image("https://cdn-icons-png.flaticon.com/512/747/747376.png", width=120, caption="Welcome to My App")
+
+# Tiêu đề và mô tả
+st.markdown("<h2 style='text-align: center;'>🔐 Secure Login</h2>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>Please enter your credentials to continue</p>", unsafe_allow_html=True)
+
+# STYLE tuỳ chỉnh bằng HTML
 st.markdown("""
     <style>
-    .main {
-        background-color: #f0f2f6;
+    .login-container {
+        background-color: #f9f9f9;
         padding: 2rem;
-        border-radius: 10px;
+        border-radius: 15px;
         max-width: 400px;
         margin: auto;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
     }
     </style>
 """, unsafe_allow_html=True)
 
-# Tạo form đăng nhập
+# FORM
 with st.form("login_form"):
-    st.markdown('<div class="main">', unsafe_allow_html=True)
+    st.markdown('<div class="login-container">', unsafe_allow_html=True)
 
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
+    username = st.text_input("👤 Username")
+    password = st.text_input("🔒 Password", type="password")
     remember = st.checkbox("Remember me")
 
     login_button = st.form_submit_button("Log In")
 
     st.markdown('</div>', unsafe_allow_html=True)
 
-# Xử lý đăng nhập giả lập
+# Kiểm tra đăng nhập
 if login_button:
     if username == "admin" and password == "123456":
-        st.success("✅ Login successful! Welcome, admin.")
+        st.success(f"✅ Welcome back, **{username}**!")
+        st.balloons()
     else:
-        st.error("❌ Invalid username or password.")
+        st.error("❌ Wrong username or password. Try again.")
