@@ -1,13 +1,85 @@
 import streamlit as st
 
-# Cấu hình trang
+# ==== Cấu hình Streamlit ====
 st.set_page_config(page_title="Car Showroom", layout="wide")
 
-# Tạo session lưu giỏ hàng
+# ==== Tạo session lưu giỏ hàng ====
 if "cart" not in st.session_state:
     st.session_state.cart = []
 
-# Dữ liệu xe
+# ==== Thanh điều hướng giống BMW ====
+st.markdown("""
+    <style>
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 40px;
+            background-color: white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        .navbar-left img {
+            height: 40px;
+        }
+        .navbar-left a {
+            text-decoration: none;
+            color: black;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        .navbar-left a:hover {
+            color: #007BFF;
+        }
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+        .navbar-right span {
+            cursor: pointer;
+        }
+        .navbar-right span:hover {
+            color: #000;
+        }
+    </style>
+
+    <div class="navbar">
+        <div class="navbar-left">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/BMW.svg" alt="logo">
+            <a href="#">Trang chủ</a>
+            <a href="#">Mẫu Xe</a>
+            <a href="#">Đặt Hẹn Lái Thử</a>
+            <a href="#">Hệ Thống Phân Phối</a>
+            <a href="#">Tìm Hiểu Thêm BMW</a>
+        </div>
+        <div class="navbar-right">
+            <span>ENG</span>
+            <span>🛒</span>
+            <span>📍</span>
+        </div>
+    </div>
+""", unsafe_allow_html=True)
+
+# ==== Tiêu đề chính ====
+st.markdown("""
+    <div style="text-align:center; padding:30px 0 10px;">
+        <h1 style="font-size:3.5em; color:#FF4B4B;">🚘 Premium Car Showroom</h1>
+        <p style="font-size:1.3em; color:gray;">Choose your next ride with style!</p>
+    </div>
+    <hr style="border:1px solid #eee;">
+""", unsafe_allow_html=True)
+
+# ==== Dữ liệu các dòng xe ====
 cars = [
     {
         "id": 1,
@@ -32,19 +104,10 @@ cars = [
     }
 ]
 
-# Giao diện tiêu đề chính
-st.markdown("""
-    <div style="text-align:center; padding:30px 0 10px;">
-        <h1 style="font-size:3.5em; color:#FF4B4B;">🚘 Premium Car Showroom</h1>
-        <p style="font-size:1.3em; color:gray;">Choose your next ride with style!</p>
-    </div>
-    <hr style="border:1px solid #eee;">
-""", unsafe_allow_html=True)
-
-# Layout: trái (sản phẩm) - phải (giỏ hàng)
+# ==== Layout: trái (sản phẩm) - phải (giỏ hàng) ====
 left, right = st.columns([2.5, 1])
 
-# ==== CỘT TRÁI: Danh sách sản phẩm ====
+# ==== CỘT TRÁI: Sản phẩm ====
 with left:
     st.markdown("""
         <h2 style="color:#2E86C1; font-weight:700;">🏎️ Cars for Sale</h2>
