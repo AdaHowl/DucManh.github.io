@@ -36,9 +36,6 @@ cars = [
 st.markdown("<h1 style='text-align:center;'>🚘 Premium Car Showroom</h1>", unsafe_allow_html=True)
 st.markdown("<h4 style='text-align:center; color:gray;'>Choose your next ride!</h4>", unsafe_allow_html=True)
 st.markdown("---")
- "image": "https://www.google.com/imgres?q=xe&imgurl=https%3A%2F%2Fimg.docnhanh.vn%2Fimages%2Fuploads%2F2023%2F01%2F02%2Fanh-1-1270.jpg&imgrefurl=https%3A%2F%2Fdocnhanh.vn%2Fo-to-xe-may%2Fnhung-mau-sieu-xe-xe-the-thao-lan-dau-ve-viet-nam-trong-nam-2022-tintuc857860&docid=KqyiMw8fV2jR6M&tbnid=HxDVYmjoOjCZqM&vet=12ahUKEwjgqYPbm_CNAxUPnK8BHXhwAMEQM3oECGkQAA..i&w=2048&h=1365&hcb=2&ved=2ahUKEwjgqYPbm_CNAxUPnK8BHXhwAMEQM3oECGkQAA",
-# Layout: trái (sản phẩm) - phải (giỏ hàng)
-left, right = st.columns([2, 1])
 
 # CỘT TRÁI: Danh sách sản phẩm
 with left:
