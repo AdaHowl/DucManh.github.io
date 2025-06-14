@@ -20,14 +20,14 @@ cars = [
         "id": 2,
         "name": "Tesla Model 3",
         "price": 48000,
-        "image": "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7",
+        "image": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fdantri.com.vn%2Fo-to-xe-may%2Ftop-10-xe-moi-dat-nhat-the-gioi-hien-nay-20221005154110406.htm&psig=AOvVaw1oNjTyRx2Ae_zTW8cWfp38&ust=1749966595599000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCJiBo-Cb8I0DFQAAAAAdAAAAABAL",
         "desc": "Electric, autopilot, budget-friendly luxury."
     },
     {
         "id": 3,
         "name": "BMW M4",
         "price": 90000,
-        "image": "https://images.unsplash.com/photo-1619025082454-2b9a7fe55bd2",
+        "image": "https://www.google.com/imgres?q=xe&imgurl=https%3A%2F%2Ftapchi.toyota.com.vn%2Fuploads%2Fimages%2Fcac-dong-xe-toyota-16.png&imgrefurl=https%3A%2F%2Ftapchi.toyota.com.vn%2Fvi%2Ftin-tuc%2F228%2Fcac-dong-xe-toyota&docid=sFWpKsuoDzjc7M&tbnid=zyqjYxiBRIExSM&vet=12ahUKEwjgqYPbm_CNAxUPnK8BHXhwAMEQM3oECEAQAA..i&w=1218&h=1015&hcb=2&ved=2ahUKEwjgqYPbm_CNAxUPnK8BHXhwAMEQM3oECEAQAA",
         "desc": "Sporty coupe, high performance, German engineering."
     }
 ]
@@ -36,7 +36,7 @@ cars = [
 st.markdown("<h1 style='text-align:center;'>🚘 Premium Car Showroom</h1>", unsafe_allow_html=True)
 st.markdown("<h4 style='text-align:center; color:gray;'>Choose your next ride!</h4>", unsafe_allow_html=True)
 st.markdown("---")
-
+ "image": "https://www.google.com/imgres?q=xe&imgurl=https%3A%2F%2Fimg.docnhanh.vn%2Fimages%2Fuploads%2F2023%2F01%2F02%2Fanh-1-1270.jpg&imgrefurl=https%3A%2F%2Fdocnhanh.vn%2Fo-to-xe-may%2Fnhung-mau-sieu-xe-xe-the-thao-lan-dau-ve-viet-nam-trong-nam-2022-tintuc857860&docid=KqyiMw8fV2jR6M&tbnid=HxDVYmjoOjCZqM&vet=12ahUKEwjgqYPbm_CNAxUPnK8BHXhwAMEQM3oECGkQAA..i&w=2048&h=1365&hcb=2&ved=2ahUKEwjgqYPbm_CNAxUPnK8BHXhwAMEQM3oECGkQAA",
 # Layout: trái (sản phẩm) - phải (giỏ hàng)
 left, right = st.columns([2, 1])
 
