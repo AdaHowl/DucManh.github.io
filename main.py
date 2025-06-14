@@ -13,21 +13,21 @@ cars = [
         "id": 1,
         "name": "Lamborghini Aventador",
         "price": 300000,
-        "image": "https://cafefcdn.com/203337114487263232/2023/7/20/lambor-1689840945762-16898409458521341482549.jpg",
+        "image": "https://images.unsplash.com/photo-1616352119484-0c3a3bd1269d",
         "desc": "V12 engine, aggressive design, supercar class."
     },
     {
         "id": 2,
         "name": "Tesla Model 3",
         "price": 48000,
-        "image": "https://hyundaibinhthuan.vn/wp-content/uploads/Ngoai-that-Hyundai-Tucson-10-3.jpg",
+        "image": "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7",
         "desc": "Electric, autopilot, budget-friendly luxury."
     },
     {
         "id": 3,
         "name": "BMW M4",
         "price": 90000,
-        "image": "https://media.vov.vn/sites/default/files/styles/large/public/2023-07/z4500176061644_8dd6ee4c917cd893d7ae135dc8a51368.jpg",
+        "image": "https://images.unsplash.com/photo-1619025082454-2b9a7fe55bd2",
         "desc": "Sporty coupe, high performance, German engineering."
     }
 ]
@@ -36,6 +36,9 @@ cars = [
 st.markdown("<h1 style='text-align:center;'>🚘 Premium Car Showroom</h1>", unsafe_allow_html=True)
 st.markdown("<h4 style='text-align:center; color:gray;'>Choose your next ride!</h4>", unsafe_allow_html=True)
 st.markdown("---")
+
+# Layout: trái (sản phẩm) - phải (giỏ hàng)
+left, right = st.columns([2, 1])
 
 # CỘT TRÁI: Danh sách sản phẩm
 with left:
