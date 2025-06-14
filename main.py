@@ -1,85 +1,13 @@
 import streamlit as st
 
-# ==== Cấu hình Streamlit ====
-st.set_page_config(page_title="Car Showroom", layout="wide")
+# Cấu hình trang
+st.set_page_config(page_title="Premium Car Showroom", layout="wide")
 
-# ==== Tạo session lưu giỏ hàng ====
+# Khởi tạo giỏ hàng nếu chưa có
 if "cart" not in st.session_state:
     st.session_state.cart = []
 
-# ==== Thanh điều hướng giống BMW ====
-st.markdown("""
-    <style>
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 40px;
-            background-color: white;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 999;
-        }
-        .navbar-left {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-        }
-        .navbar-left img {
-            height: 40px;
-        }
-        .navbar-left a {
-            text-decoration: none;
-            color: black;
-            font-weight: 500;
-            font-size: 16px;
-        }
-        .navbar-left a:hover {
-            color: #007BFF;
-        }
-        .navbar-right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            font-size: 16px;
-            color: #555;
-        }
-        .navbar-right span {
-            cursor: pointer;
-        }
-        .navbar-right span:hover {
-            color: #000;
-        }
-    </style>
-
-    <div class="navbar">
-        <div class="navbar-left">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/BMW.svg" alt="logo">
-            <a href="#">Trang chủ</a>
-            <a href="#">Mẫu Xe</a>
-            <a href="#">Đặt Hẹn Lái Thử</a>
-            <a href="#">Hệ Thống Phân Phối</a>
-            <a href="#">Tìm Hiểu Thêm BMW</a>
-        </div>
-        <div class="navbar-right">
-            <span>ENG</span>
-            <span>🛒</span>
-            <span>📍</span>
-        </div>
-    </div>
-""", unsafe_allow_html=True)
-
-# ==== Tiêu đề chính ====
-st.markdown("""
-    <div style="text-align:center; padding:30px 0 10px;">
-        <h1 style="font-size:3.5em; color:#FF4B4B;">🚘 Premium Car Showroom</h1>
-        <p style="font-size:1.3em; color:gray;">Choose your next ride with style!</p>
-    </div>
-    <hr style="border:1px solid #eee;">
-""", unsafe_allow_html=True)
-
-# ==== Dữ liệu các dòng xe ====
+# Dữ liệu xe
 cars = [
     {
         "id": 1,
@@ -104,49 +32,75 @@ cars = [
     }
 ]
 
-# ==== Layout: trái (sản phẩm) - phải (giỏ hàng) ====
-left, right = st.columns([2.5, 1])
+# Header hiện đại
+st.markdown("""
+    <div style='text-align:center;'>
+        <h1 style='font-size:48px;'>🚘 <span style="color:#2c3e50">Premium Car Showroom</span></h1>
+        <p style='font-size:20px; color:gray;'>Choose your next ride in style!</p>
+    </div>
+    <hr style='border:1px solid #ccc;'/>
+""", unsafe_allow_html=True)
 
-# ==== CỘT TRÁI: Sản phẩm ====
+# Layout chính: trái - phải
+left, right = st.columns([2, 1])
+
+# Cột trái: Danh sách xe
 with left:
-    st.markdown("""
-        <h2 style="color:#2E86C1; font-weight:700;">🏎️ Cars for Sale</h2>
-    """, unsafe_allow_html=True)
-
+    st.markdown("<h2 style='color:#e74c3c;'>🏎️ Cars for Sale</h2>", unsafe_allow_html=True)
     for car in cars:
-        with st.container(border=False):
-            st.markdown(f"""
-                <div style="background-color:#f9f9f9; padding:20px; margin-bottom:25px; border-radius:15px; box-shadow: 0px 4px 10px rgba(0,0,0,0.05);">
-                    <img src="{car['image']}" style="width:100%; border-radius:10px;"/>
-                    <h3 style="margin-top:15px;">{car['name']}</h3>
-                    <p style="color:#888;">{car['desc']}</p>
-                    <p style="font-weight:bold; color:#27AE60;">💰 Price: ${car['price']:,}</p>
-                </div>
-            """, unsafe_allow_html=True)
-
-            if st.button(f"➕ Add to Cart: {car['name']}", key=f"add_{car['id']}"):
+        with st.container(border=True):
+            st.image(car["image"], use_container_width=True)
+            st.markdown(f"<h4>{car['name']}</h4>", unsafe_allow_html=True)
+            st.markdown(f"<b>💰 Price:</b> ${car['price']:,}")
+            st.caption(car["desc"])
+            if st.button("➕ Add to Cart", key=f"add_{car['id']}"):
                 st.session_state.cart.append(car)
                 st.success(f"{car['name']} added to cart!")
 
-# ==== CỘT PHẢI: Giỏ hàng ====
+# Cột phải: Giỏ hàng
 with right:
-    st.subheader("🛒 Your Cart")
+    st.markdown("<h3>🛒 Your Cart</h3>", unsafe_allow_html=True)
     total = 0
     if st.session_state.cart:
         for item in st.session_state.cart:
             st.write(f"• {item['name']} - ${item['price']:,}")
             total += item['price']
-        st.markdown(f"**🧾 Total: ${total:,}**")
-
-        col1, col2 = st.columns(2)
-        with col1:
-            if st.button("❌ Clear Cart"):
-                st.session_state.cart = []
-                st.info("Cart cleared!")
-        with col2:
-            if st.button("✅ Checkout"):
-                st.success("🎉 Purchase successful! Thank you.")
-                st.balloons()
-                st.session_state.cart = []
+        st.markdown(f"<b>🧾 Total: ${total:,}</b>", unsafe_allow_html=True)
+        if st.button("✅ Checkout"):
+            st.success("🎉 Purchase successful! Thank you.")
+            st.balloons()
+            st.session_state.cart = []
+        if st.button("❌ Clear Cart"):
+            st.session_state.cart = []
+            st.info("Cart cleared!")
     else:
         st.info("Your cart is empty.")
+
+# FOOTER
+st.markdown("---")
+st.markdown("""
+    <div style="background-color:#2c3e50;padding:40px;color:white;border-radius:10px;margin-top:30px;">
+        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;">
+            <div>
+                <h3 style="color:white;">Motorist</h3>
+                <p>Câu Chuyện Thương Hiệu<br/>Công Việc<br/>Liên Hệ Chúng Tôi<br/>Cảm Nhận</p>
+            </div>
+            <div>
+                <h3 style="color:white;">Dịch Vụ</h3>
+                <p>Bán Xe<br/>Thẩm Định Xe</p>
+            </div>
+            <div>
+                <h3 style="color:white;">Liên Hệ</h3>
+                <p>📍 Căn D-00.03, Tầng 3, Số 02 Đường Số 13, TP. Thủ Đức<br/>
+                🕒 10:00 - 18:00 (cả ngày lễ)<br/>
+                📞 02873080018<br/>
+                📧 enquiry@motorist.vn</p>
+            </div>
+            <div>
+                <h3 style="color:white;">Đăng Ký Nhận Tin</h3>
+                <input type="text" placeholder="Email của bạn" style="padding:8px;border:none;border-radius:5px;width:200px;">
+                <button style="padding:8px;background-color:#27ae60;color:white;border:none;border-radius:5px;margin-left:5px;">Đăng ký</button>
+            </div>
+        </div>
+    </div>
+""", unsafe_allow_html=True)
